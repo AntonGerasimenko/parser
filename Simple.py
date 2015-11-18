@@ -71,7 +71,7 @@ def main():
    events_list = parse(html)
    db(events_list)
 
-   #print_result(events_list)
+   print_result(events_list)
 
 if __name__ == '__main__':
         main()
