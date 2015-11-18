@@ -10,8 +10,6 @@ class HttpProcessor(BaseHTTPRequestHandler):
         self.wfile.write("hello !")
 
 
-
-
 serv = HTTPServer(("localhost",80),HttpProcessor)
 serv.serve_forever()
 
