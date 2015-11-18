@@ -20,7 +20,7 @@ def parse(html):
             'text': rows.p.text,
             'image': rows.img["src"],
             'title': rows.h1.a["title"],
-            'id': rows["id"]
+            'id': int (rows["id"][5:])
         })
 
     return list
@@ -45,6 +45,7 @@ def db(events_list):
     conn = _sqlite3.connect('events.db')
     conn.execute('''CREATE TABLE IF NOT EXISTS EVENTS
        (ID INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT,
+       ID_EVENT INTEGER NOT NULL,
        TITLE           TEXT    NOT NULL,
        _TEXT            TEXT     NOT NULL,
        IMAGE        TEXT NOT NULL );''')
@@ -52,11 +53,12 @@ def db(events_list):
 
     for event in events_list:
 
+        id_event = event['id']
         title = "'" + event['title'] +"'"
         _text = "'" + event['text'] +"'"
         image = "'" + event['image'] +"'"
 
-        string = "INSERT INTO EVENTS (TITLE,_TEXT,IMAGE) VALUES ("+title+","+_text+","+image+")"
+        string = "INSERT INTO EVENTS (ID_EVENT,TITLE,_TEXT,IMAGE) VALUES ("+id_event+","+title+","+_text+","+image+")"
         conn.execute(string)
 
     conn.commit()
