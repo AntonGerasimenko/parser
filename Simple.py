@@ -53,7 +53,7 @@ def db(events_list):
 
     for event in events_list:
 
-        id_event = event['id']
+        id_event = str(event['id'])
         title = "'" + event['title'] +"'"
         _text = "'" + event['text'] +"'"
         image = "'" + event['image'] +"'"
@@ -69,9 +69,9 @@ def main():
 
    html = get_html("http://www.graffiti.by/")
    events_list = parse(html)
-   #db(events_list)
+   db(events_list)
 
-   print_result(events_list)
+   #print_result(events_list)
 
 if __name__ == '__main__':
         main()
