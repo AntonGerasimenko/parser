@@ -2,6 +2,8 @@ import urllib
 from bs4 import BeautifulSoup
 import _sqlite3
 
+import _json
+
 def get_html(url):
 
     response = urllib.urlopen(url)
@@ -65,11 +67,26 @@ def db(events_list):
     print "Records created successfully"
     conn.close()
 
+
+def create_json():
+
+    encoder = _json.make_encoder({"foo": "bar" "baz"})
+
+
+
+#    encoder.encode({"foo": "bar" "baz"})
+
+
+
+    print(encoder)
+
 def main():
 
-   html = get_html("http://www.graffiti.by/")
-   events_list = parse(html)
-   db(events_list)
+    create_json()
+
+   #html = get_html("http://www.graffiti.by/")
+   #events_list = parse(html)
+   #db(events_list)
 
    print_result(events_list)
 
