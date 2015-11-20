@@ -1,5 +1,5 @@
 from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
-import Client
+import JsonCreator as creator
 import json
 class HttpProcessor(BaseHTTPRequestHandler):
 
@@ -9,16 +9,16 @@ class HttpProcessor(BaseHTTPRequestHandler):
 
             length = int(self.headers.getheader('content-length'))
             data = self.rfile.read(length)
-            resp = json.loads(data)
-            dict = json.loads(str(resp))
+            dict = creator.parse(data)
 
+            if (True == dict['all']):
 
-            self.send_response(200)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
+                self.send_response(200)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
 
-            jsn = Client.get_Json()
-            self.wfile.write(jsn)
+                jsn = creator.resp_all_events_json()
+                self.wfile.write(jsn)
 
         else :
             self.send_response(200)

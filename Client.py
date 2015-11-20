@@ -1,28 +1,27 @@
 import urllib
 import requests
-import json
+import JsonCreator as creator
+
 
 def get_html(url):
 
     response = urllib.urlopen(url)
     return response.read()
 
-def get_Json():
-
-    data = {}
-    data['key'] = 'value'
-    data['pass'] = 'bober'
-    json_data = json.dumps(data)
-
-    return json_data
-
 
 def post(url):
 
-    json = get_Json()
-    r = requests.post(url,None,json, auth=('user', 'pass'))
 
-    return r.json()
+    json = creator.req_all_events_json()
+
+    json = creator.resp_all_events_json()
+
+    print (json)
+
+   # r = requests.post(url,None,json, auth=('user', 'pass'))
+
+
+    #return r.text
 
 def main():
 
