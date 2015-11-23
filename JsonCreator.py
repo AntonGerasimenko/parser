@@ -1,5 +1,5 @@
 import json
-
+from DB import data_base as DB
 
 def empty_json():
 
@@ -17,6 +17,9 @@ def resp_all_events_json():
 
     all = {}
 
+    rows = DB.read()
+
+
     for num in range(0,5):
 
         data = {}
@@ -28,10 +31,12 @@ def resp_all_events_json():
         all['event'] = data
 
 
-    return json.dumps(all)
+    return json.dumps(rows)
 
 
 def parse(data):
 
     buff = json.loads(data)
     return json.loads(str(buff))
+
+

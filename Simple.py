@@ -1,8 +1,7 @@
 import urllib
 from bs4 import BeautifulSoup
-import _sqlite3
-
-import _json
+from DB import data_base as DB
+import JsonCreator as js_cr
 
 def get_html(url):
 
@@ -40,55 +39,18 @@ def print_result(list):
         print(image)
         print(id)
 
-
-
-def db(events_list):
-
-    conn = _sqlite3.connect('events.db')
-    conn.execute('''CREATE TABLE IF NOT EXISTS EVENTS
-       (ID INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT,
-       ID_EVENT INTEGER NOT NULL,
-       TITLE           TEXT    NOT NULL,
-       _TEXT            TEXT     NOT NULL,
-       IMAGE        TEXT NOT NULL );''')
-    print "Table created successfully"
-
-    for event in events_list:
-
-        id_event = str(event['id'])
-        title = "'" + event['title'] +"'"
-        _text = "'" + event['text'] +"'"
-        image = "'" + event['image'] +"'"
-
-        string = "INSERT INTO EVENTS (ID_EVENT,TITLE,_TEXT,IMAGE) VALUES ("+id_event+","+title+","+_text+","+image+")"
-        conn.execute(string)
-
-    conn.commit()
-    print "Records created successfully"
-    conn.close()
-
-
-def create_json():
-
-    encoder = _json.make_encoder({"foo": "bar" "baz"})
-
-
-
-#    encoder.encode({"foo": "bar" "baz"})
-
-
-
-    print(encoder)
-
 def main():
 
-    create_json()
 
-   #html = get_html("http://www.graffiti.by/")
-   #events_list = parse(html)
-   #db(events_list)
+    DB.read()
 
-   print_result(events_list)
+
+
+
+ #  html = get_html("http://www.graffiti.by/")
+ #  events_list = parse(html)
+ #  DB.write(events_list)
+ #  print_result(events_list)
 
 if __name__ == '__main__':
         main()

@@ -1,6 +1,5 @@
 from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
 import JsonCreator as creator
-import json
 class HttpProcessor(BaseHTTPRequestHandler):
 
     def do_POST(self):
