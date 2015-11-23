@@ -1,5 +1,6 @@
 import json
 from DB import data_base as DB
+import os
 
 def empty_json():
 
@@ -16,9 +17,8 @@ def req_all_events_json():
 def resp_all_events_json():
 
     all = {}
-
-    rows = DB.read()
-
+    path = os.path.dirname(os.path.abspath(__file__)) + '\\events.db'
+    rows = DB.read(path)
 
     for num in range(0,5):
 
@@ -30,13 +30,15 @@ def resp_all_events_json():
 
         all['event'] = data
 
-
     return json.dumps(rows)
 
 
 def parse(data):
 
-    buff = json.loads(data)
-    return json.loads(str(buff))
+    dict = {"all",True}
+
+    #buff = json.loads(data)
+    #return json.loads(str(buff))
+    return dict
 
 

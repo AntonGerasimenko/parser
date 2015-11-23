@@ -1,7 +1,6 @@
 import urllib
+import JsonCreator
 import requests
-import JsonCreator as creator
-
 
 def get_html(url):
 
@@ -12,20 +11,17 @@ def get_html(url):
 def post(url):
 
 
-    json = creator.req_all_events_json()
-
-    json = creator.resp_all_events_json()
+    json = JsonCreator.req_all_events_json()
 
     print (json)
 
-   # r = requests.post(url,None,json, auth=('user', 'pass'))
+    r = requests.post(url,None,json, auth=('user', 'pass'))
 
-
-    #return r.text
+    return r.text
 
 def main():
 
-    print (post('http://127.0.0.1'))
+    print (post('http://192.168.5.55'))
 
 if __name__ == '__main__':
     main()

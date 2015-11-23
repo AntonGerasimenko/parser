@@ -1,8 +1,6 @@
 import _sqlite3
 
-DBname = 'events.db'
-
-def write(events_list):
+def write(events_list, DBname):
 
     conn = _sqlite3.connect(DBname)
     conn.execute('''CREATE TABLE IF NOT EXISTS EVENTS
@@ -27,7 +25,7 @@ def write(events_list):
     print "Records created successfully"
     conn.close()
 
-def read():
+def read(DBname):
 
      conn = _sqlite3.connect(DBname)
      cursor = conn.cursor()
