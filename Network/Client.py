@@ -9,8 +9,9 @@ def get_html(url):
 
 def post(url):
 
-    json = creator.req_all_events_json()
-    print (json)
+    json = creator.req_all_events_json({13648, 13654,13664,13651,13657,13667,13670})
+    print "Get all events with the exception of : "
+    print  json
 
     r = requests.post(url,None,json, auth=('user', 'pass'))
 
@@ -18,7 +19,9 @@ def post(url):
 
 def main():
 
-   post('http://192.168.5.55')
+    response = post('http://192.168.5.55')
+    print "Server response:"
+    print response.text
 
 if __name__ == '__main__':
     main()

@@ -27,22 +27,30 @@ def write(events_list, DBname):
     print "Records created successfully"
     conn.close()
 
-def read(DBname):
+def read(DBname, except_ids=None):
 
-     conn = _sqlite3.connect(DBname)
-     cursor = conn.cursor()
-     cursor.execute("SELECT DISTINCT ID_EVENT, DATE_EVENT , TITLE, _TEXT, IMAGE FROM EVENTS")
+    resp_str = "SELECT DISTINCT ID_EVENT, DATE_EVENT , TITLE, _TEXT, IMAGE FROM EVENTS"
+    if except_ids!=None:
+        resp_str += " WHERE "
+        for id in except_ids:
+            resp_str += " ID_EVENT != "+ str(id) + " AND "
+        resp_str = resp_str[:-4]
 
-     one_row ={}
-     result = list()
+    print resp_str
+    conn = _sqlite3.connect(DBname)
+    cursor = conn.cursor()
+    cursor.execute(resp_str)
 
-     for row in cursor:
-         one_row["id"] = row[0]
-         one_row["date"] = row[1]
-         one_row["title"] = row[2]
-         one_row["text"] = row[3]
-         one_row["image"] = row[4]
-         result.append(dict(one_row))
+    one_row ={}
+    result = list()
 
-     conn.close()
-     return result
+    for row in cursor:
+        one_row["id"] = row[0]
+        one_row["date"] = row[1]
+        one_row["title"] = row[2]
+        one_row["text"] = row[3]
+        one_row["image"] = row[4]
+        result.append(dict(one_row))
+
+    conn.close()
+    return result
