@@ -20,12 +20,8 @@ class HttpProcessor(BaseHTTPRequestHandler):
                 for key in item.keys():
                     if key == 'all':
                         print "Return All events... "
-                        self.send_response(200)
-                        self.send_header('Content-Type', 'application/json')
-                        self.end_headers()
-
                         jsn = creator.resp_all_events_json()
-                        self.wfile.write(jsn)
+                        self.make_json(jsn)
                         return
                     elif key == 'id':
                         id = item['id']
@@ -33,10 +29,7 @@ class HttpProcessor(BaseHTTPRequestHandler):
                         print "Add excepion list id = " + str(id)
 
             jsn = creator.resp_all_events_json(ids)
-            self.send_response(200)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            self.wfile.write(jsn)
+            self.make_json(jsn)
         else:
             self.send_response(200)
             self.send_header('Content-Type', 'text/html')
@@ -52,6 +45,12 @@ class HttpProcessor(BaseHTTPRequestHandler):
          self.end_headers()
 
          self.wfile.write("This HTML response")
+    def make_json(self,jsn):
+        self.send_response(200)
+        self.send_header('Content-Type', 'application/json')
+        self.end_headers()
+        self.wfile.write(jsn)
+
 
 serv = HTTPServer((host,80),HttpProcessor)
 serv.serve_forever()
