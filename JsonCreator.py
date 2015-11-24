@@ -2,43 +2,45 @@ import json
 from DB import data_base as DB
 import os
 
+def get_all_rows():
+    path = os.path.dirname(os.path.abspath(__file__)) + '\\events.db'
+    return DB.read(path)
+
 def empty_json():
 
     return json.dumps('')
 
 
-def req_all_events_json():
 
+
+def req_all_events_json(olds=None):
     data = {}
-    data['all'] = True
+    out = list()
 
-    return json.dumps(data)
+    if olds == None:
+        data['all'] = True
+        out.append(data)
+        return out
+    else:
+        for old in olds:
+            data = {}
+            data['id'] = old
+            out.append(data)
+        return out
 
-def resp_all_events_json():
 
-    all = {}
-    path = os.path.dirname(os.path.abspath(__file__)) + '\\events.db'
-    rows = DB.read(path)
 
-    for num in range(0,5):
+def resp_all_events_json(olds=None):
 
-        data = {}
-        data['id'] = 1
-        data['title'] = "Gorky Park"
-        data['text'] = "Dark Blue Red"
-        data['image'] = "http://hdkjhfksdf.jpg"
+    rows = get_all_rows()
+    if olds==None:
+        return json.dumps(rows)
 
-        all['event'] = data
-
-    return json.dumps(rows)
 
 
 def parse(data):
 
-
-
     dict = json.loads(data)
-    #return json.loads(str(buff))
     return dict
 
 

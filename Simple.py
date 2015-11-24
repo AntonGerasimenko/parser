@@ -14,11 +14,14 @@ def parse(html):
     table = soup.find('div',id='content')
 
     list = []
-
     for rows in table.find_all('div','post'):
+        all_text =''
+        for text_p in rows.find_all('p'):
+            if text_p.text !='':
+                all_text+=text_p.text
 
         list.append({
-            'text': rows.p.text,
+            'text': all_text,
             'image': rows.img["src"],
             'title': rows.h1.a["title"][7:],
             'date': rows.h1.a["title"][:6],

@@ -16,7 +16,9 @@ class HttpProcessor(BaseHTTPRequestHandler):
 
             print data
 
-            dict = creator.parse(data)
+            for item in creator.parse(data):
+
+                break
 
             if (True == dict['all']):
 
