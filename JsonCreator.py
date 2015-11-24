@@ -35,9 +35,9 @@ def resp_all_events_json():
 
 def parse(data):
 
-    dict = {"all",True}
 
-    #buff = json.loads(data)
+
+    dict = json.loads(data)
     #return json.loads(str(buff))
     return dict
 

@@ -10,8 +10,6 @@ class HttpProcessor(BaseHTTPRequestHandler):
 
             print "application/json"
 
-
-
             length = int(self.headers.getheader('content-length'))
             print length
             data = self.rfile.read(length)

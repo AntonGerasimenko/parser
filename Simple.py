@@ -1,7 +1,7 @@
 import urllib
 from bs4 import BeautifulSoup
 from DB import data_base as DB
-import JsonCreator as js_cr
+import os
 
 def get_html(url):
 
@@ -20,7 +20,8 @@ def parse(html):
         list.append({
             'text': rows.p.text,
             'image': rows.img["src"],
-            'title': rows.h1.a["title"],
+            'title': rows.h1.a["title"][7:],
+            'date': rows.h1.a["title"][:6],
             'id': int (rows["id"][5:])
         })
 
@@ -30,27 +31,26 @@ def print_result(list):
      for entry in list:
 
         title = entry['title']
+        date = entry['date']
         text = entry['text']
         image = entry['image']
         id = entry['id']
 
-        print(title)
-        print(text)
-        print(image)
-        print(id)
+        print id
+        print title
+        print date
+        print text
+        print image
 
 def main():
 
+    html = get_html("http://www.graffiti.by/")
+    events_list = parse(html)
 
-    DB.read()
+    path = os.path.dirname(os.path.abspath(__file__)) + '\\events.db'
 
-
-
-
- #  html = get_html("http://www.graffiti.by/")
- #  events_list = parse(html)
- #  DB.write(events_list)
- #  print_result(events_list)
+    DB.write(events_list,path)
+    print_result(events_list)
 
 if __name__ == '__main__':
         main()
