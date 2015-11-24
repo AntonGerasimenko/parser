@@ -17,19 +17,16 @@ class HttpProcessor(BaseHTTPRequestHandler):
             print data
 
             for item in creator.parse(data):
+                for key in item.keys():
+                    if key == 'all':
+                        print "all"
+                        self.send_response(200)
+                        self.send_header('Content-Type', 'application/json')
+                        self.end_headers()
 
-                break
-
-            if (True == dict['all']):
-
-                print "True"
-
-                self.send_response(200)
-                self.send_header('Content-Type', 'application/json')
-                self.end_headers()
-
-                jsn = creator.resp_all_events_json()
-                self.wfile.write(jsn)
+                        jsn = creator.resp_all_events_json()
+                        self.wfile.write(jsn)
+                        break
 
         else:
             self.send_response(200)
