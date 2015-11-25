@@ -36,7 +36,7 @@ def read(DBname, except_ids=None, add_time=None):
 
     resp_str = "SELECT DISTINCT ID_EVENT, TIME_ADD, DATE_EVENT, TITLE, _TEXT, IMAGE FROM EVENTS"
 
-    if len(except_ids) > 0 or add_time > None:
+    if len(except_ids) > 0 or add_time > 0:
         resp_str += " WHERE "
     if add_time > 0:
         resp_str += " TIME_ADD > "+str(add_time)

@@ -19,6 +19,7 @@ class HttpProcessor(BaseHTTPRequestHandler):
             all = False
 
             for item in creator.parse(data):
+                print item.keys()
                 for key in item.keys():
                     if key == 'all':
                         print "Return All events..."

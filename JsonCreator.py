@@ -13,20 +13,21 @@ def empty_json():
     return json.dumps('')
 
 def req_all_events_json(olds=None,time=None):
-    data = {}
     out = list()
     if time != None:
+        data = {}
         data['time'] = time
         out.append(data)
     if olds == None:
+        data ={}
         data['all'] = True
+        out.append(data)
     else:
         for old in olds:
             data = {}
             data['id'] = old
             out.append(data)
     return out
-
 
 def resp_all_events_json(except_ids=None,time=None):
 
