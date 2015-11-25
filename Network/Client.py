@@ -8,8 +8,8 @@ def get_html(url):
     return response.read()
 
 def post(url):
-
-    json = creator.req_all_events_json({13648, 13654,13664,13651,13657,13667,13670})
+    #{13648, 13654,13664,13651,13657,13667,13670}
+    json = creator.req_all_events_json(time=894056955)
     print "Get all events with the exception of : "
     print  json
 

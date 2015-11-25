@@ -33,17 +33,11 @@ def parse(html):
 def print_result(list):
      for entry in list:
 
-        title = entry['title']
-        date = entry['date']
-        text = entry['text']
-        image = entry['image']
-        id = entry['id']
-
-        print id
-        print title
-        print date
-        print text
-        print image
+        print entry['id']
+        print entry['title']
+        print entry['date']
+        print entry['text']
+        print entry['image']
 
 def main():
 
